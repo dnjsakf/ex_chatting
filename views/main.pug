@@ -22,7 +22,6 @@ html
           height:100%;
         }
       }
-    
   body
     div#frame
       div#logo_frame
@@ -34,7 +33,19 @@ html
           li
             a(href=url)
               =text
-        
-          
+  #script_socket
+    script(src='https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js')
+    script(src='/socket.io/socket.io.js')
+    script.
+      $(function(){
+        var socket = io();
+        var userInfo = {
+          userName: "heo",
+          userNick: "허돌프"
+        }
+        socket.emit('login', userInfo);
+        socket.on('connected', function(connectedInfo){
+          alert(connectedInfo.nick + ' connected');
+        });
+      });
       
-    

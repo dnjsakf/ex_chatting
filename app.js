@@ -1,8 +1,11 @@
 var express = require('express');
-var bodyParser = require('body-parser');
 var route = express.Router();
 var app = express();
+
 var server = require('http').createServer(app);
+var io = require('./server.js')(server);
+
+var bodyParser = require('body-parser');
 
 app.locals.pretty = true;
 app.set('view engine', 'pug');
@@ -14,16 +17,23 @@ app.use(express.static('public'));
 /* Route */
 /*********/
 app.get('/main', function(req, res){
-  res.render('main');
+  var userInfo = {
+    userName: "heo"
+  }
+  res.render('main', userInfo);
 });
 app.get('/robby/:robbyNumber', function(req, res){
-  var robbyNumber = req.params.robbyNumber;
-  res.render('robby' , {robbyNum:robbyNumber});
+  var robbyInfo = {
+    robbyNum: req.params.robbyNumber
+  }
+  res.render('robby' , robbyInfo);
 });
 app.get('/room/:roomNumber/:roomName', function(req, res){
-  var roomNumber = req.params.roomNumber;
-  var roomName = req.params.roomName;
-  res.render('room', {roomName:roomName, roomNumber:roomNumber});
+  var roomInfo = {
+    roomNumber: req.params.roomNumber,
+    roomName: req.params.roomName
+  }
+  res.render('room', roomInfo);
 });
 
 /**********/
