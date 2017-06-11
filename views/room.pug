@@ -1,0 +1,76 @@
+extends ./robby.pug
+block content
+  head
+    style.
+      div.roomInfo{
+        background:white;
+        width:100%;
+        margin: 0 auto;
+        display:flex;
+      }
+      div.roomInfo > .roomNumber,
+      div.roomInfo > .roomName{
+        border: solid 1px;
+        flex:1;
+        text-align: center;
+      }
+      div.chatarea{
+        width:100%;
+        height:100%;
+      }
+      div.chatarea > .chatlog{
+        width:100%;
+        height:50%;
+      }
+      div.chatarea > .chatform{
+        width:100%;
+        height:10%;
+        display: flex;
+        background: red;
+      }
+      div.chatarea > .chatform > .username,
+      div.chatarea > .chatform > .chatform.send{
+        background: lightblue;
+        flex: 1;
+        text-align: center;
+      }
+      div.chatarea > .chatform > .inputmsg{
+        background: lightyellow;
+        flex: 5;
+      }
+      div.members{
+        height:30%;
+        width:100%;
+        border: solid 1px;
+        background: skyblue;
+      }
+      
+  div.roomInfo
+    strong.roomInfo.roomNumber 방번호(
+      =roomNumber
+      | )
+    strong.roomInfo.roomName 방제목(
+      =roomName
+      | )
+  div.members
+    | need a frame
+  div.chatarea
+    textarea.chatarea.chatlog
+    form.chatarea.chatform
+      input.chatarea.chatform.username(type='text' value='username' readonly)
+      input.chatarea.chatform.inputmsg(type='text' placeHolder='Please input text here...')
+      input.chatarea.chatform.send(type='submit' value='전송')
+  #box.scriptBox
+    script.
+      $(function(){
+        $('.chatform').submit(function(e){
+          e.preventDefault();
+          var inputMsg = $('.inputmsg');
+          var msg = {
+            userName: $('.username').val(),
+            sendMsg: inputMsg.val()
+          }
+          console.log('User:', msg.userName, "Msg:",msg.sendMsg);
+          inputMsg.val("");
+        });
+      });

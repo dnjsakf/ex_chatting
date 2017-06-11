@@ -1,0 +1,55 @@
+doctype html
+html
+  head
+    meta(charset='utf-8')
+    script(src='https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js')
+    style.
+      @media screen and (min-width: 480px){
+        body{
+          padding-top: 2vw;
+          margin: 0 auto;
+          width: 95vw;
+          height: 100vw;
+          background: lightgreen;
+        }
+        div.foobar{
+          border: solid 1px;
+          width:100%;
+          height:5%;
+          display: flex;
+        }
+        div.foobar > a.main{
+          flex: 1;
+        }
+        div.foobar > a.robbyName{
+          flex: 10;
+        }
+        
+        div.middle{
+          width: 100%;
+          height:40%;
+          border: solid 1px;
+        }
+        div.bottom{
+          width: 100%;
+          height: 45%;
+          border: solid 1px;
+        }
+      }
+  body
+    div.foobar
+      a.foobar.robbyName
+        strong Welcome robby(
+          =robbyNum
+          |)
+      a.foobar.main(href='/main') main
+    div.middle
+      -var roomNames = ['ComeOn', 'Welcome', 'Fight!!!']
+      ul
+        -for(var i=0; i<roomNames.length; i++)
+          -var url = '/room/'+(i+1)+'/'+roomNames[i]
+          li
+            a(href=url)
+              =roomNames[i]+'('+i+')'
+    div.bottom
+      block content
