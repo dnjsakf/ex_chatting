@@ -13,9 +13,9 @@ app.set('views', './views');
 app.use(bodyParser.urlencoded({extended:false}));
 app.use(express.static('public'));
 
-/*********/
-/* Route */
-/*********/
+/***********************/
+/******** Route ********/
+/***********************/
 app.get('/main', function(req, res){
   var userInfo = {
     userName: "heo"
@@ -36,9 +36,9 @@ app.get('/room/:roomNumber/:roomName', function(req, res){
   res.render('room', roomInfo);
 });
 
-/**********/
-/* socket */
-/**********/
+/****************************/
+/********** socket **********/
+/****************************/
 
 server.listen('3000', function(req, res){
   console.log('Connected Server 3000 port!!');
